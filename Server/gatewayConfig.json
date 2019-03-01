@@ -7,6 +7,6 @@
     "ethereum": {
         "creditcoinContract": "0x46356077cd7A793e4B7aCf289c7c79dD783F4794",
         "creditcoinContractAbi": "[{'constant':false,'inputs':[{'name':'tokens','type':'uint256'},{'name':'sighash','type':'string'}],'name':'burn','outputs':[{'name':'success','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'tokens','type':'uint256'},{'name':'sighash','type':'string'}],'name':'exchange','outputs':[{'name':'success','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'anonymous':false,'inputs':[{'indexed':false,'name':'burner','type':'address'},{'indexed':false,'name':'amount','type':'uint256'},{'indexed':false,'name':'sighash','type':'string'}],'name':'Exchanged','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'amount','type':'uint256'}],'name':'strLen','type':'event'},{'constant':true,'inputs':[{'name':'tokenOwner','type':'address'}],'name':'balanceOf','outputs':[{'name':'balance','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'}]",
-        "rpc": "https://rinkeby.infura.io/kA9gXZjDdhcnVG0HJf2s",
+        "rpc": "<ethereum_node_url>"
     }
 }
