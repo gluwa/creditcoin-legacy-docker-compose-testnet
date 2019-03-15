@@ -1,4 +1,4 @@
-# <img src="Images/logo.png" alt="Creditcoin" width="50" /> Creditcoin Public Testnet
+# ![](Images/logo.png) Creditcoin Public Testnet
 
 ## Introduction
 
