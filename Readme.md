@@ -100,7 +100,7 @@ Before you get started, there are a few things which you'll need to have:
    * rpc: The Rinkeby Infura RPC testnet node (e.g. `https://rinkeby.infura.io/xxxxxxxxxxxx`) or your own personal testnet node (e.g. http://localhost:8545) that you set up during [the Preparation step](#Preparation)
    * confirmationsCount: `1`
 
-####Server/creditcoin-with-gateway.yaml
+#### Server/creditcoin-with-gateway.yaml
 * Replace *"[insert.your.ip]"* on lines 51 and 61 with your external IP<sup>1</sup>  
 `                    --endpoint tcp://[insert.your.ip]:8800 \`
 
