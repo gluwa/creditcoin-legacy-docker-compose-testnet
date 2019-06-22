@@ -70,7 +70,7 @@ Before you get started, there are a few things which you'll need to have:
 ### Node and Gateway Configuration
 
 #### Server/gatewayConfig.json
-```json
+```
 {
     "bindIP": "0.0.0.0",
     "bitcoin": {
@@ -94,7 +94,7 @@ Before you get started, there are a few things which you'll need to have:
  * ethereum - **Must be completed with the values below for Public Testnet. Contract must be lowercase**
    * creditcoinContract: `0x46356077cd7a793e4b7acf289c7c79dd783f4794`
    * creditcoinContractAbi:  
-   ```json
+   ```
    [{'constant':false,'inputs':[{'name':'tokens','type':'uint256'},{'name':'sighash','type':'string'}],'name':'burn','outputs':[{'name':'success','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'tokens','type':'uint256'},{'name':'sighash','type':'string'}],'name':'exchange','outputs':[{'name':'success','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'anonymous':false,'inputs':[{'indexed':false,'name':'burner','type':'address'},{'indexed':false,'name':'amount','type':'uint256'},{'indexed':false,'name':'sighash','type':'string'}],'name':'Exchanged','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'amount','type':'uint256'}],'name':'strLen','type':'event'},{'constant':true,'inputs':[{'name':'tokenOwner','type':'address'}],'name':'balanceOf','outputs':[{'name':'balance','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'}]
    ```
    * rpc: The Rinkeby Infura RPC testnet node (e.g. `https://rinkeby.infura.io/xxxxxxxxxxxx`) or your own personal testnet node (e.g. http://localhost:8545) that you set up during [the Preparation step](#Preparation)
