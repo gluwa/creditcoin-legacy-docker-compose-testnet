@@ -49,7 +49,7 @@ Before you get started, there are a few things which you'll need to have:
 ```
 
  * signer: *Your 256 bit SECP256K1 ECDSA key*
- * creditcoinRestApiURL: `http://rest-api:8008`
+ * creditcoinRestApiURL: *Leave blank*
  * bitcoin - This section can be left blank if you do not intend to loan/fundraise Bitcoin
    * secret: *Your bitcoin private key*
    * rpc: *Your bitcoin RPC node*
