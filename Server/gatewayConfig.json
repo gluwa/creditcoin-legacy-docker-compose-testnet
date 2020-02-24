@@ -1,12 +1,18 @@
 {
-    "bindIP": "0.0.0.0",
-    "bitcoin": {
-        "rpc": "<bitcoin_rpc_node_url>",
-        "credential": "<rpc_username:rpc_password>"
-    },
-    "ethereum": {
-        "creditcoinContract": "0x46356077cd7a793e4b7acf289c7c79dd783f4794",
-        "creditcoinContractAbi": "[{'constant':false,'inputs':[{'name':'tokens','type':'uint256'},{'name':'sighash','type':'string'}],'name':'burn','outputs':[{'name':'success','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'tokens','type':'uint256'},{'name':'sighash','type':'string'}],'name':'exchange','outputs':[{'name':'success','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'anonymous':false,'inputs':[{'indexed':false,'name':'burner','type':'address'},{'indexed':false,'name':'amount','type':'uint256'},{'indexed':false,'name':'sighash','type':'string'}],'name':'Exchanged','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'amount','type':'uint256'}],'name':'strLen','type':'event'},{'constant':true,'inputs':[{'name':'tokenOwner','type':'address'}],'name':'balanceOf','outputs':[{'name':'balance','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'}]",
-        "rpc": "<ethereum_node_url>"
-    }
+  "bindIP": "0.0.0.0",
+  "bitcoin": {
+    "rpc": "<bitcoin_rpc_node_url>",
+    "credential": "<rpc_username:rpc_password>"
+  },
+  "ethereum": {
+    "creditcoinContract": "0x46356077cd7a793e4b7acf289c7c79dd783f4794",
+    "creditcoinContractAbi": "[{'constant':false,'inputs':[{'name':'tokens','type':'uint256'},{'name':'sighash','type':'string'}],'name':'burn','outputs':[{'name':'success','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'constant':false,'inputs':[{'name':'tokens','type':'uint256'},{'name':'sighash','type':'string'}],'name':'exchange','outputs':[{'name':'success','type':'bool'}],'payable':false,'stateMutability':'nonpayable','type':'function'},{'anonymous':false,'inputs':[{'indexed':false,'name':'burner','type':'address'},{'indexed':false,'name':'amount','type':'uint256'},{'indexed':false,'name':'sighash','type':'string'}],'name':'Exchanged','type':'event'},{'anonymous':false,'inputs':[{'indexed':false,'name':'amount','type':'uint256'}],'name':'strLen','type':'event'},{'constant':true,'inputs':[{'name':'tokenOwner','type':'address'}],'name':'balanceOf','outputs':[{'name':'balance','type':'uint256'}],'payable':false,'stateMutability':'view','type':'function'}]",
+    "rpc": "<ethereum_node_url>"
+  },
+  "ethless" : {
+    "rpc": "<ethereum_node_url>"
+  },
+  "erc20": {
+    "rpc": "<ethereum_node_url>"
+  }
 }
