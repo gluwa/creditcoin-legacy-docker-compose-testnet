@@ -15,7 +15,7 @@ Before you get started, there are a few things which you'll need to have:
 ![Example Rinkeby Infura RPC testnet node](Images/testnet-preparation-infura.png)
 
 * Docker Desktop<sup>1</sup> (https://www.docker.com/products/docker-desktop)
-* A clone or zip of the Creditcoin Public Testnet GitHub repository (https://github.com/gluwa/CreditcoinPublicTestnet)
+* A clone or zip of the Creditcoin Public Testnet GitHub repository (https://github.com/gluwa/CreditcoinDockerCompose-Testnet)
 
 <sup>1</sup> Make sure you allow Docker to access the drive that the Creditcoin containers will be running on by opening Docker Desktop settings and checking the drive under the `Shared Drives` section. See https://docs.docker.com/docker-for-windows/#shared-drives for more information.  
 ![Screenshot of Shared Drives window in Docker Desktop](Images/testnet-preparation-shareddrives.png)
