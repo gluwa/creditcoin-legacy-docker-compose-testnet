@@ -21,18 +21,18 @@ services:
 
   settings-tp:
     image: hyperledger/sawtooth-settings-tp:1.0
-    container_name: sawtooth-settings-tp-default
+    container_name: sawtooth-settings-tp-testnet
     depends_on:
       - validator
     entrypoint: settings-tp -vv -C tcp://validator:4004
-
+    stop_signal: SIGKILL
 
   validator:
-    image: gluwa/creditcoin-validator-debug:latest
-    container_name: sawtooth-validator-default
+    image: gluwa/creditcoin-validator:nightly
+    container_name: sawtooth-validator-testnet
     volumes:
       - type: volume
-        source: validator-block-volume
+        source: validator-testblock-volume
         target: /var/lib/sawtooth/
       - type: volume
         source: validator-key-volume
@@ -43,48 +43,41 @@ services:
     ports:
       - "4004:4004"
       - "8800:8800"
-    entrypoint: |
+    command: |
         bash -c 'if [[ ! -f /etc/sawtooth/keys/validator.pub ]]
             then 
                 echo "First run"
-                sawadm keygen && sawtooth-validator -vv \
-                    --endpoint tcp://[insert.your.ip]:8800 \
-                    --bind component:tcp://eth0:4004 \
-                    --bind network:tcp://eth0:8800 \
-                    --peering dynamic \
-                    --seeds tcp://creditcoin-test-node.gluwa.com:8800 \
-                    --scheduler parallel \
-                    --minimum-peer-connectivity 2
-            else 
-                echo "Second run"
-                sawtooth-validator -vv \
-                    --endpoint tcp://[insert.your.ip]:8800 \
-                    --bind component:tcp://eth0:4004 \
-                    --bind network:tcp://eth0:8800 \
-                    --peering dynamic \
-                    --seeds tcp://creditcoin-test-node.gluwa.com:8800 \
-                    --scheduler parallel \
-                    --minimum-peer-connectivity 2
+                sawadm keygen
             fi
-            EOF'
+            sawtooth-validator -vv \
+                --endpoint tcp://[insert.your.ip]:8800 \
+                --bind component:tcp://eth0:4004 \
+                --bind network:tcp://eth0:8800 \
+                --peering dynamic \
+                --seeds tcp://creditcoin-test-node.gluwa.com:8800 \
+                --seeds tcp://creditcoin-test-gateway.gluwa.com:8800 \
+                --scheduler parallel \
+                --minimum-peer-connectivity 2'
+    stop_signal: SIGKILL
 
   rest-api:
     image: hyperledger/sawtooth-rest-api:1.0
-    container_name: sawtooth-rest-api-default
+    container_name: sawtooth-rest-api-testnet
     ports:
-      - "8008:8008"
+      - 8008:8008
     depends_on:
       - validator
-    entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
+    command: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
+    stop_signal: SIGKILL
 
   processor:
-    image: gluwa/creditcoin-processor-debug:latest
-    container_name: creditcoin-processor
+    image: gluwa/creditcoin-processor-next:nightly
+    container_name: creditcoin-processor-testnet
     depends_on:
       - validator
       - settings-tp
       - rest-api
-    entrypoint: |
+    command: |
         bash -c 'rest_status=$$(curl -s --head -w %{http_code} http://rest-api:8008/state?address=000000 -o /dev/null)
             while [ "$$rest_status" != "200" ]
             do
@@ -92,26 +85,27 @@ services:
                 sleep 2
                 rest_status=$$(curl -s --head -w %{http_code} http://rest-api:8008/state?address=000000 -o /dev/null)
             done
-            ./ccprocessorLinux.out tcp://validator:4004 tcp://gateway:55555 http://rest-api:8008
-        EOF'
+            ./ccprocessorLinux.out tcp://validator:4004 tcp://gateway:55555 http://rest-api:8008'
+    stop_signal: SIGKILL
 
   gateway:
-    image: gluwa/creditcoin-gateway-debug:latest
-    container_name: creditcoin-gateway
+    image: gluwa/creditcoin-gateway-next:nightly
+    container_name: creditcoin-gateway-testnet
     expose:
       - 55555
     ports:
-      - "55555:55555"
+      - 55555:55555
     secrets:
      - source: gateway_config
        target: /home/Creditcoin/Gateway/appsettings.json
     entrypoint: ./ccgateway
+    stop_signal: SIGKILL
     
 secrets:
   gateway_config:
     file: ./gatewayConfig.json
     
 volumes:
-  validator-block-volume:
+  validator-testblock-volume:
   validator-key-volume:
   

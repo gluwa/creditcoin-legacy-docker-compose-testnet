@@ -44,6 +44,12 @@ Before you get started, there are a few things which you'll need to have:
     "confirmationsCount": "1",
     "secret": "<ethereum_private_key_no_0x>",
     "gasPriceInGwei":  "<set_to_override_gas_price>"
+  },
+  "ethless" : {
+    "rpc": "<ethereum_node_url>"
+  },
+  "erc20": {
+    "rpc": "<ethereum_node_url>"
   }
 }
 ```
@@ -66,6 +72,10 @@ Before you get started, there are a few things which you'll need to have:
    * confirmationsCount: This can be set to `1` for testnet purposes
    * secret: *Your ethereum private key without the `0x` prefix*
    * gasPriceInGwei: Can be left blank unless you know what you're doing
+ * ethless
+   * rpc: The Rinkeby Infura RPC testnet node (e.g. `https://rinkeby.infura.io/xxxxxxxxxxxx`) or your own personal testnet node (e.g. http://localhost:8545) that you set up during [the Preparation step](#Preparation)
+ * erc20
+   * rpc: The Rinkeby Infura RPC testnet node (e.g. `https://rinkeby.infura.io/xxxxxxxxxxxx`) or your own personal testnet node (e.g. http://localhost:8545) that you set up during [the Preparation step](#Preparation)
 
 ### Node and Gateway Configuration
 
@@ -83,6 +93,12 @@ Before you get started, there are a few things which you'll need to have:
         "creditcoinContractAbi": "<creditcoinContractAbi>",
         "rpc": "<ethereum_node_url>",
         "confirmationsCount": "1"
+    },
+    "ethless" : {
+        "rpc": "<ethereum_node_url>"
+    },
+    "erc20": {
+        "rpc": "<ethereum_node_url>"
     }
 }
 ```
@@ -99,12 +115,16 @@ Before you get started, there are a few things which you'll need to have:
    ```
    * rpc: The Rinkeby Infura RPC testnet node (e.g. `https://rinkeby.infura.io/xxxxxxxxxxxx`) or your own personal testnet node (e.g. http://localhost:8545) that you set up during [the Preparation step](#Preparation)
    * confirmationsCount: `1`
+ * ethless
+   * rpc: The Rinkeby Infura RPC testnet node (e.g. `https://rinkeby.infura.io/xxxxxxxxxxxx`) or your own personal testnet node (e.g. http://localhost:8545) that you set up during [the Preparation step](#Preparation)
+ * erc20
+   * rpc: The Rinkeby Infura RPC testnet node (e.g. `https://rinkeby.infura.io/xxxxxxxxxxxx`) or your own personal testnet node (e.g. http://localhost:8545) that you set up during [the Preparation step](#Preparation)
 
-#### Server/creditcoin-with-gateway.yaml
-* Replace *"[insert.your.ip]"* on lines 51 and 61 with your external IP<sup>1</sup>  
+#### Server/docker-compose.yaml
+* Replace *"[insert.your.ip]"* on line 53 with your external IP<sup>1</sup>  
 `                    --endpoint tcp://[insert.your.ip]:8800 \`
 
-<sup>1</sup> Google 'IP' to get this:  
+<sup>1</sup> Google 'My IP' to get this:  
 ![Image showing IP on Google Search results page](Images/testnet-configuration-ip.png)
 
 
@@ -114,7 +134,7 @@ Now that you've got Docker Desktop installed, and you've updated your Creditcoin
 ### Run the Creditcoin Client
 1. Open a Command Prompt, Terminal or Bash window
 2. Browse to the folder containing the `Client` and `Server` folders (e.g. `cd C:\Creditcoin`)
-3. Type `docker-compose -f Client/creditcoin-client.yaml up -d`
+3. Type `docker-compose -f Client/docker-compose.yaml up -d`
 4. Access the Creditcoin Client bash using this command: `docker exec -it creditcoin-client bash`
 5. Get your sighash by typing `./ccclient sighash` into the Creditcoin Client bash  
 ![Example sighash returned by Creditcoin Client](Images/testnet-connecting-sighash.png)
@@ -122,7 +142,7 @@ Now that you've got Docker Desktop installed, and you've updated your Creditcoin
 ### Run the Creditcoin Node and Gateway
 1. Open a Command Prompt, Terminal or Bash window
 2. Browse to the folder containing the `Client` and `Server` folders (e.g. `cd C:\Creditcoin`)
-3. Type `docker-compose -f Server/creditcoin-with-gateway.yaml up`
+3. Type `docker-compose -f Server/docker-compose.yaml up`
 
 ### Fund your account
 Note: Before funding your account, you'll need some Ether in your Ethereum wallet. Go to https://faucet.rinkeby.io/ and follow the instructions to add Ether to your wallet using the Rinkeby Faucet.
@@ -138,12 +158,12 @@ In the [Creditcoin Client window you opened above](#Run-the-Creditcoin-Client) t
 ### Stop the Creditcoin Node and Gateway
 1. Open a Command Prompt, Terminal or Bash window
 2. Browse to the folder containing the `Client` and `Server` folders (e.g. `cd C:\Creditcoin`)
-3. Type `docker-compose -f Server/creditcoin-with-gateway.yaml down`
+3. Type `docker-compose -f Server/docker-compose.yaml down`
 
 ### Stop the Creditcoin Client
 1. Open a Command Prompt, Terminal or Bash window
 2. Browse to the folder containing the `Client` and `Server` folders (e.g. `cd C:\Creditcoin`)
-3. Type `docker-compose -f Client/creditcoin-client.yaml down`
+3. Type `docker-compose -f Client/docker-compose.yaml down`
 
 
 ## Troubleshooting

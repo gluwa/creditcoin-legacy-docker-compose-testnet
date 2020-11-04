@@ -13,5 +13,11 @@
     "rpc": "<ethereum_node_url>",
     "secret": "<ethereum_private_key_no_0x>",
     "gasPriceInGwei":  "<set_to_override_gas_price>"
+  },
+  "ethless" : {
+    "rpc": "<ethereum_node_url>"
+  },
+  "erc20": {
+    "rpc": "<ethereum_node_url>"
   }
 }
