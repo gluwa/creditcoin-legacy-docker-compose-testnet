@@ -6,12 +6,12 @@
 #	it under the terms of the GNU Lesser General Public License as published by
 #	the Free Software Foundation, either version 3 of the License, or
 #	(at your option) any later version.
-#	
+#
 #	This program is distributed in the hope that it will be useful,
 #	but WITHOUT ANY WARRANTY; without even the implied warranty of
 #	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #	GNU Lesser General Public License for more details.
-#	
+#
 #	You should have received a copy of the GNU Lesser General Public License
 #	along with Creditcoin. If not, see <https://www.gnu.org/licenses/>.
 
@@ -24,7 +24,9 @@ services:
     container_name: sawtooth-settings-tp-testnet
     depends_on:
       - validator
-    entrypoint: settings-tp -vv -C tcp://validator:4004
+    expose:
+      - 4004
+    command: settings-tp -C tcp://validator:4004
     stop_signal: SIGKILL
 
   validator:
@@ -41,8 +43,8 @@ services:
       - 4004
       - 8800
     ports:
-      - "4004:4004"
-      - "8800:8800"
+      - 4004:4004
+      - 8800:8800
     command: |
         bash -c 'if [[ ! -f /etc/sawtooth/keys/validator.pub ]]
             then 
@@ -50,19 +52,19 @@ services:
                 sawadm keygen
             fi
             sawtooth-validator -vv \
-                --endpoint tcp://[insert.your.ip]:8800 \
                 --bind component:tcp://eth0:4004 \
                 --bind network:tcp://eth0:8800 \
+                --scheduler parallel \
                 --peering dynamic \
                 --seeds tcp://creditcoin-test-node.gluwa.com:8800 \
-                --seeds tcp://creditcoin-test-gateway.gluwa.com:8800 \
-                --scheduler parallel \
-                --minimum-peer-connectivity 2'
+                --seeds tcp://creditcoin-test-gateway.gluwa.com:8800'
     stop_signal: SIGKILL
 
   rest-api:
     image: hyperledger/sawtooth-rest-api:1.0
     container_name: sawtooth-rest-api-testnet
+    expose:
+      - 8008
     ports:
       - 8008:8008
     depends_on:
@@ -77,6 +79,8 @@ services:
       - validator
       - settings-tp
       - rest-api
+    expose:
+      - 4004
     command: |
         bash -c 'rest_status=$$(curl -s --head -w %{http_code} http://rest-api:8008/state?address=000000 -o /dev/null)
             while [ "$$rest_status" != "200" ]
@@ -100,12 +104,11 @@ services:
        target: /home/Creditcoin/Gateway/appsettings.json
     entrypoint: ./ccgateway
     stop_signal: SIGKILL
-    
+
 secrets:
   gateway_config:
     file: ./gatewayConfig.json
-    
+
 volumes:
   validator-testblock-volume:
   validator-key-volume:
-  
