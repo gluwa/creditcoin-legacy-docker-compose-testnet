@@ -52,6 +52,7 @@ services:
                 sawadm keygen
             fi
             sawtooth-validator -vv \
+                --endpoint tcp://[insert.your.ip]:8800 \
                 --bind component:tcp://eth0:4004 \
                 --bind network:tcp://eth0:8800 \
                 --scheduler parallel \
@@ -61,7 +62,7 @@ services:
     stop_signal: SIGKILL
 
   rest-api:
-    image: hyperledger/sawtooth-rest-api:1.0
+    image: gluwa/sawtooth-rest-api:nightly
     container_name: sawtooth-rest-api-testnet
     expose:
       - 8008
