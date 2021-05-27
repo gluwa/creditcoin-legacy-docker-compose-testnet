@@ -79,18 +79,9 @@ services:
     depends_on:
       - validator
       - settings-tp
-      - rest-api
     expose:
       - 4004
-    command: |
-        bash -c 'rest_status=$$(curl -s --head -w %{http_code} http://rest-api:8008/state?address=000000 -o /dev/null)
-            while [ "$$rest_status" != "200" ]
-            do
-                echo $$rest_status
-                sleep 2
-                rest_status=$$(curl -s --head -w %{http_code} http://rest-api:8008/state?address=000000 -o /dev/null)
-            done
-            ./ccprocessorLinux.out tcp://validator:4004 tcp://gateway:55555 http://rest-api:8008'
+    command: ./ccprocessorLinux.out tcp://validator:4004 tcp://gateway:55555
     stop_signal: SIGKILL
 
   gateway:
