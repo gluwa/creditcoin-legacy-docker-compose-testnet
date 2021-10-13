@@ -30,7 +30,7 @@ services:
     stop_signal: SIGKILL
 
   validator:
-    image: gluwa/creditcoin-validator:nightly
+    image: gluwa/creditcoin-validator:1.7
     container_name: sawtooth-validator-testnet
     volumes:
       - type: volume
@@ -62,7 +62,7 @@ services:
     stop_signal: SIGKILL
 
   rest-api:
-    image: gluwa/sawtooth-rest-api:nightly
+    image: gluwa/sawtooth-rest-api:1.7
     container_name: sawtooth-rest-api-testnet
     expose:
       - 8008
@@ -85,7 +85,7 @@ services:
     stop_signal: SIGKILL
 
   gateway:
-    image: gluwa/creditcoin-gateway-next:nightly
+    image: gluwa/creditcoin-gateway:1.7
     container_name: creditcoin-gateway-testnet
     expose:
       - 55555
