@@ -74,7 +74,7 @@ services:
     stop_signal: SIGKILL
 
   processor:
-    image: gluwa/creditcoin-processor-next:nightly
+    image: gluwa/creditcoin-processor:1.7
     container_name: creditcoin-processor-testnet
     depends_on:
       - validator
