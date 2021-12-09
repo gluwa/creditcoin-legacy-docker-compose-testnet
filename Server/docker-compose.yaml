@@ -21,7 +21,7 @@ services:
 
   settings-tp:
     image: hyperledger/sawtooth-settings-tp:1.2
-    container_name: sawtooth-settings-tp
+    container_name: sawtooth-settings-tp-testnet
     depends_on:
       - validator
     entrypoint: settings-tp -C tcp://validator:4004
