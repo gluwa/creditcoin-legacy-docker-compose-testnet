@@ -33,7 +33,7 @@ services:
             max-size: "10m"
 
   validator:
-    image: gluwa/creditcoin-validator-priv:testnet-latest
+    image: gluwa/creditcoin-validator-priv:testing-2.0-21
     container_name: sawtooth-validator-testnet
     volumes:
       - type: volume
@@ -79,7 +79,7 @@ services:
             max-size: "100m"
 
   rest-api:
-    image: gluwa/sawtooth-rest-api-priv:testnet-latest
+    image: gluwa/sawtooth-rest-api-priv:testing-2.0-21
     container_name: sawtooth-rest-api-testnet
     ports:
       - 8008:8008
@@ -97,7 +97,7 @@ services:
             max-size: "10m"
 
   processor:
-    image: gluwa/creditcoin-processor-priv:testnet-latest
+    image: gluwa/creditcoin-processor-priv:testing-2.0-21
     container_name: creditcoin-processor-testnet
     depends_on:
       - validator
@@ -111,14 +111,14 @@ services:
             max-size: "10m"
 
   consensus:
-    image: gluwa/creditcoin-consensus-priv:testnet-latest
+    image: gluwa/creditcoin-consensus-priv:testing-2.0-21
     container_name: consensus
     depends_on:
       - validator
     entrypoint: ccconsensus -E tcp://validator:5050 -vvv
 
   gateway:
-    image: gluwa/creditcoin-gateway-priv:testnet-latest
+    image: gluwa/creditcoin-gateway-priv:testing-2.0-19
     container_name: creditcoin-gateway-testnet
     expose:
       - 55555
