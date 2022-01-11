@@ -71,6 +71,10 @@ services:
                 --seeds tcp://20.113.27.206:8800 \
                 --seeds tcp://20.87.27.245:8800 \
                 --scheduler parallel'
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
     stop_signal: SIGKILL
     logging:
         driver: "json-file"
@@ -116,6 +120,10 @@ services:
     depends_on:
       - validator
     entrypoint: ccconsensus -E tcp://validator:5050 -vvv
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
 
   gateway:
     image: gluwa/creditcoin-gateway-priv:testing-2.0-19
