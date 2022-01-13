@@ -70,7 +70,7 @@ services:
                 --seeds tcp://54.244.68.135:8800 \
                 --seeds tcp://20.113.27.206:8800 \
                 --seeds tcp://20.87.27.245:8800 \
-                --scheduler parallel'
+                --scheduler serial'
     stop_signal: SIGKILL
     logging:
         driver: "json-file"
