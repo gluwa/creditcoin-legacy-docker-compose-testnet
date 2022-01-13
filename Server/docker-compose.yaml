@@ -1,4 +1,4 @@
-#	Copyright(c) 2018-2021 Gluwa, Inc.
+#	Copyright(c) 2018-2022 Gluwa, Inc.
 #
 #	This file is part of Creditcoin.
 #
@@ -70,7 +70,8 @@ services:
                 --seeds tcp://54.244.68.135:8800 \
                 --seeds tcp://20.113.27.206:8800 \
                 --seeds tcp://20.87.27.245:8800 \
-                --scheduler parallel'
+                --scheduler serial \
+                --state-pruning-block-depth 2000000'
     deploy:
       restart_policy:
         condition: on-failure
