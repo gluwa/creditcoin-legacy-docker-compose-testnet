@@ -33,7 +33,7 @@ services:
             max-size: "10m"
 
   validator:
-    image: gluwa/creditcoin-validator-priv:testing-2.0-21
+    image: gluwa/creditcoin-validator-priv:testing-2.0-28
     container_name: sawtooth-validator-testnet
     volumes:
       - type: volume
@@ -66,8 +66,6 @@ services:
                 --peering dynamic \
                 --seeds tcp://20.188.27.55:8800 \
                 --seeds tcp://40.112.252.222:8800 \
-                --seeds tcp://54.185.193.31:8800 \
-                --seeds tcp://54.244.68.135:8800 \
                 --seeds tcp://20.113.27.206:8800 \
                 --seeds tcp://20.87.27.245:8800 \
                 --scheduler serial \
@@ -84,7 +82,7 @@ services:
             max-size: "100m"
 
   rest-api:
-    image: gluwa/sawtooth-rest-api-priv:testing-2.0-21
+    image: gluwa/sawtooth-rest-api-priv:testing-2.0-28
     container_name: sawtooth-rest-api-testnet
     ports:
       - 8008:8008
@@ -102,7 +100,7 @@ services:
             max-size: "10m"
 
   processor:
-    image: gluwa/creditcoin-processor-priv:testing-2.0-21
+    image: gluwa/creditcoin-processor-priv:testing-2.0-25
     container_name: creditcoin-processor-testnet
     depends_on:
       - validator
@@ -116,7 +114,7 @@ services:
             max-size: "10m"
 
   consensus:
-    image: gluwa/creditcoin-consensus-priv:testing-2.0-21
+    image: gluwa/creditcoin-consensus-priv:testing-2.0-26
     container_name: consensus
     depends_on:
       - validator
@@ -127,7 +125,7 @@ services:
         delay: 5s
 
   gateway:
-    image: gluwa/creditcoin-gateway-priv:testing-2.0-19
+    image: gluwa/creditcoin-gateway-priv:testing-2.0-22
     container_name: creditcoin-gateway-testnet
     expose:
       - 55555
