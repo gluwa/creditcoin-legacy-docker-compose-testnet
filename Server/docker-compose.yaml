@@ -15,6 +15,33 @@
 #	You should have received a copy of the GNU Lesser General Public License
 #	along with Creditcoin. If not, see <https://www.gnu.org/licenses/>.
 
+#       This docker-compose file uses the following images below:
+#
+#       REPOSITORY                         TAG              IMAGE ID       SIZE
+#       gluwa/sawtooth-rest-api-priv       testing-2.0-29   7b1d8bd62893   224MB
+#       gluwa/creditcoin-validator-priv    testing-2.0-29   15887c9ed0ba   390MB
+#       gluwa/creditcoin-processor-priv    testing-2.0-29   850090b03c6e   2.93GB
+#       gluwa/creditcoin-consensus-priv    testing-2.0-29   60f3e9b0e887   342MB
+#       gluwa/creditcoin-gateway-priv      testing-2.0-29   5a6d120fbd2f   738MB
+#
+#       Built from:
+#
+#       Sawtooth-Core (validator/rest-api):
+#            - https://github.com/gluwa/Sawtooth-Core/pull/54
+#            - https://github.com/gluwa/Sawtooth-Core/pull/55
+#            - https://github.com/gluwa/Sawtooth-Core/pull/59
+#            - https://github.com/gluwa/Sawtooth-Core/pull/60
+#            - https://github.com/gluwa/Sawtooth-Core/pull/61
+#            - rebased onto dev@f80dc9d5249dcfe3ee1acb121e44f01c1be0dc67
+#        Creditcoin-Processor-Rust:
+#            - dev@ac074bcb2899125b2c5ac6197f24d9a4fca86aae
+#        Creditcoin-Consensus-Rust:
+#            - https://github.com/gluwa/Creditcoin-Consensus-Rust/pull/34
+#            - https://github.com/gluwa/Creditcoin-Consensus-Rust/pull/19
+#            - rebased onto dev@48b19e442cb18300cd43db3f400dce19ecba0a73
+#        Creditcoin-Gateway:
+#            - dev@e354f2e2a837f7408f5bba21f9a4fa015120b694
+
 version: "3.7"
 
 services:
