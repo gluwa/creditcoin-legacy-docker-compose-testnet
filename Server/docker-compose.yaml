@@ -97,6 +97,7 @@ services:
                 --seeds tcp://20.87.27.245:8800 \
                 --scheduler serial \
                 --state-pruning-block-depth 2000000'
+    restart: on-failure
     deploy:
       restart_policy:
         condition: on-failure
@@ -146,6 +147,7 @@ services:
     depends_on:
       - validator
     entrypoint: ccconsensus -E tcp://validator:5050 -vvv
+    restart: on-failure
     deploy:
       restart_policy:
         condition: on-failure
