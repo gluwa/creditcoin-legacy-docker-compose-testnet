@@ -1,0 +1,75 @@
+#
+# Copyright 2017 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ------------------------------------------------------------------------------
+
+version = 1
+disable_existing_loggers = false
+
+# The host and port for Open TSDB database used for metrics
+opentsdb_url = "https://eastus-1.azure.cloud2.influxdata.com"
+
+# The name of the database used for storing metrics
+opentsdb_db = "c67c8a1e535b81d0"
+
+opentsdb_username = "franklin.okpako@gluwa.com"
+opentsdb_password  = "V3VueA0V41GuK0MvKoiq1r8vd5YyJe7M-3OdP4G09Cub7spwO1nADIRxXrOTlI-wSzdm9ojfvSLkARygJtrTjg=="
+
+# [formatters.simple]
+# format = "[%(asctime)s.%(msecs)03d [%(threadName)s] %(module)s %(levelname)s] %(message)s"
+# datefmt = "%H:%M:%S"
+
+# [handlers.debug]
+# level = "DEBUG"
+# formatter = "simple"
+# class = "logging.handlers.RotatingFileHandler"
+# filename = "/var/log/sawtooth/validator-debug.log"
+# maxBytes = 100000000
+# backupCount=10
+
+# [handlers.info]
+# level = "INFO"
+# formatter = "simple"
+# class = "logging.handlers.RotatingFileHandler"
+# filename = "/var/log/sawtooth/validator-info.log"
+# maxBytes = 100000000
+# backupCount=10
+
+# [handlers.warning]
+# level = "WARNING"
+# formatter = "simple"
+# class = "logging.handlers.RotatingFileHandler"
+# filename = "/var/log/sawtooth/validator-warning.log"
+# maxBytes = 200000000
+# backupCount=5
+
+# [handlers.error]
+# level = "ERROR"
+# formatter = "simple"
+# class = "logging.handlers.RotatingFileHandler"
+# filename = "/var/log/sawtooth/validator-error.log"
+# maxBytes = 200000000
+# backupCount=5
+
+# [handlers.critical]
+# level = "CRITICAL"
+# formatter = "simple"
+# class = "logging.handlers.RotatingFileHandler"
+# filename = "/var/log/sawtooth/validator-critical.log"
+# maxBytes = 200000000
+# backupCount=5
+
+[root]
+level = "DEBUG"
+# handlers = [ "debug", "info", "warning", "error", "critical"]
