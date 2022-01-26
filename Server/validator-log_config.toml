@@ -21,10 +21,10 @@ disable_existing_loggers = false
 opentsdb_url = "https://eastus-1.azure.cloud2.influxdata.com"
 
 # The name of the database used for storing metrics
-opentsdb_db = "c67c8a1e535b81d0"
+opentsdb_db = ${INFLUXDB_BUCKET}
 
-opentsdb_username = "franklin.okpako@gluwa.com"
-opentsdb_password  = "V3VueA0V41GuK0MvKoiq1r8vd5YyJe7M-3OdP4G09Cub7spwO1nADIRxXrOTlI-wSzdm9ojfvSLkARygJtrTjg=="
+opentsdb_username = ${INFLUXDB_USER}
+opentsdb_password  = ${INFLUXDB_PASSWORD}
 
 # [formatters.simple]
 # format = "[%(asctime)s.%(msecs)03d [%(threadName)s] %(module)s %(levelname)s] %(message)s"

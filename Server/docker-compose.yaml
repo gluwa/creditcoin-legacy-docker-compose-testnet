@@ -28,17 +28,6 @@ services:
       - 4004
     command: settings-tp -C tcp://validator:4004
     stop_signal: SIGKILL
-    logging:
-        driver: loki
-        options:
-            loki-url: https://153011:eyJrIjoiNTBjYTkzYzk0NmQ3NDdlMjA5ZmMyMTZlMzRhYzZkN2Y1NjBlZGI1MSIsIm4iOiJjY29pbmRldiIsImlkIjo1OTEzMDB9@logs-prod3.grafana.net/loki/api/v1/push
-            loki-external-labels: container_name=sawtooth-settings-tp-testnet
-            loki-relabel-config: |
-              - action: labelmap
-                regex: compose_service
-                replacement: service
-            max-file: "5"
-            max-size: "10m"
 
   validator:
     image: gluwa/creditcoin-validator:1.7
@@ -80,8 +69,7 @@ services:
     logging:
         driver: loki
         options:
-            loki-url: https://153011:eyJrIjoiNTBjYTkzYzk0NmQ3NDdlMjA5ZmMyMTZlMzRhYzZkN2Y1NjBlZGI1MSIsIm4iOiJjY29pbmRldiIsImlkIjo1OTEzMDB9@logs-prod3.grafana.net/loki/api/v1/push
-            loki-external-labels: container_name=sawtooth-validator-testnet
+            loki-url: https://${LOKI_USERNAME}:${LOKI_PASSWORD}@logs-prod3.grafana.net/loki/api/v1/push
             loki-relabel-config: |
               - action: labelmap
                 regex: compose_service
@@ -99,15 +87,17 @@ services:
     secrets:
      - source: rest_api_logging
        target: /etc/sawtooth/log_config.toml
+     - source: telegraf_logging
+       target: /etc/telegraf/telegraf.conf
     depends_on:
       - validator
-    command: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
+    command: (telegraf &) && sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
     stop_signal: SIGKILL
     logging:
         driver: loki
         options:
-            loki-url: https://153011:eyJrIjoiNTBjYTkzYzk0NmQ3NDdlMjA5ZmMyMTZlMzRhYzZkN2Y1NjBlZGI1MSIsIm4iOiJjY29pbmRldiIsImlkIjo1OTEzMDB9@logs-prod3.grafana.net/loki/api/v1/push
-            loki-external-labels: container_name=sawtooth-rest-api-testnet
+            loki-url: https://${LOKI_USERNAME}:${LOKI_PASSWORD}@logs-prod3.grafana.net/loki/api/v1/push
+            loki-external-labels: container_name=sawtooth-rest-api
             loki-relabel-config: |
               - action: labelmap
                 regex: compose_service
@@ -128,8 +118,8 @@ services:
     logging:
         driver: loki
         options:
-            loki-url: https://153011:eyJrIjoiNTBjYTkzYzk0NmQ3NDdlMjA5ZmMyMTZlMzRhYzZkN2Y1NjBlZGI1MSIsIm4iOiJjY29pbmRldiIsImlkIjo1OTEzMDB9@logs-prod3.grafana.net/loki/api/v1/push
-            loki-external-labels: container_name=creditcoin-processor-testnet
+            loki-url: https://${LOKI_USERNAME}:${LOKI_PASSWORD}@logs-prod3.grafana.net/loki/api/v1/push
+            loki-external-labels: container_name=creditcoin-processor
             loki-relabel-config: |
               - action: labelmap
                 regex: compose_service
