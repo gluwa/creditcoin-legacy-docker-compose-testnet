@@ -52,6 +52,11 @@ services:
     depends_on:
       - validator
     entrypoint: settings-tp -C tcp://validator:4004
+    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
     stop_signal: SIGKILL
     logging:
         driver: "json-file"
@@ -120,6 +125,11 @@ services:
     depends_on:
       - validator
     entrypoint: sawtooth-rest-api -vv -C tcp://validator:4004 --bind rest-api:8008
+    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
     stop_signal: SIGKILL
     logging:
         driver: "json-file"
@@ -134,6 +144,11 @@ services:
       - validator
       - settings-tp
     entrypoint: ./bin/ccprocessor-rust -E tcp://validator:4004 -G tcp://gateway:55555 -vvv
+    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
     stop_signal: SIGKILL
     logging:
         driver: "json-file"
@@ -163,7 +178,12 @@ services:
     secrets:
      - source: gateway_config
        target: /home/Creditcoin/Gateway/appsettings.json
-    entrypoint: ./ccgateway
+    entrypoint: ./ccgateway -v
+    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
     stop_signal: SIGKILL
     logging:
         driver: "json-file"
