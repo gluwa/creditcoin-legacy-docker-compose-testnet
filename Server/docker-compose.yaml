@@ -18,30 +18,22 @@
 #       This docker-compose file uses the following images below:
 #
 #       REPOSITORY                         TAG              IMAGE ID       SIZE
-#       gluwa/creditcoin-gateway-priv      testing-2.0-29   5a6d120fbd2f   738MB
-#       gluwa/creditcoin-validator-priv    testing-2.0-41   896e5322b5e8   391MB
-#       gluwa/sawtooth-rest-api-priv       testing-2.0-41   fb525e435968   225MB
-#       gluwa/creditcoin-consensus-priv    testing-2.0-41   61cf866a0c19   342MB
-#       gluwa/creditcoin-processor-priv    testing-2.0-41   903fea6199fd   3.01GB
+#       gluwa/creditcoin-consensus-priv   testing-1.8-01   af6dcd0cc96f   354MB
+#       gluwa/creditcoin-processor-priv   testing-1.8-01   00e82ee83478   3.02GB
+#       gluwa/sawtooth-rest-api-priv      testing-1.8-01   560f5c606bd2   225MB
+#       gluwa/creditcoin-validator-priv   testing-1.8-01   ac70d1225218   403MB
+#       gluwa/creditcoin-gateway-priv     testing-1.8-01   5585247d74f3   738MB
 #
 #       Built from:
 #
-#       Sawtooth-Core (validator/rest-api), https://github.com/gluwa/Sawtooth-Core/tree/testing-2.0-41:
-#            - https://github.com/gluwa/Sawtooth-Core/commits/exp/CRB-307
-#            - https://github.com/gluwa/Sawtooth-Core/commits/logs/CRB-320
-#            - https://github.com/gluwa/Sawtooth-Core/pull/64
-#            - https://github.com/gluwa/Sawtooth-Core/pull/65
-#            - https://github.com/gluwa/Sawtooth-Core/pull/66
-#            - rebased onto dev@a531aeca2ed33a8f64799326fc3d06eee2fda7d1
-#        Creditcoin-Processor-Rust, https://github.com/gluwa/Creditcoin-Processor-Rust/tree/testing-2.0-41:
-#            - https://github.com/gluwa/Creditcoin-Processor-Rust/pull/71
-#            - rebased onto dev@9f2bbb34367dc11528d7dfe901e0c1b459eae6bc
-#        Creditcoin-Consensus-Rust, https://github.com/gluwa/Creditcoin-Consensus-Rust/tree/testing-2.0-41:
-#            - https://github.com/gluwa/Creditcoin-Consensus-Rust/pull/48
-#            - Revert commit 29dc43f45e74d75ce6674cb131347e674c17cb15 (version bump)
-#            - rebased onto dev@254560c4c1d8190c65c29dc295dd8e0faebe05f2
+#       Sawtooth-Core (validator/rest-api), https://github.com/gluwa/Sawtooth-Core/tree/dev:
+#            - dev@4158e7c3dcd8dd8f987801af92f848ad684b3703
+#        Creditcoin-Processor-Rust, https://github.com/gluwa/Creditcoin-Processor-Rust/tree/dev:
+#            - dev@dff18824dc287af7828e6cf4529704eb76c82eb7
+#        Creditcoin-Consensus-Rust, https://github.com/gluwa/Creditcoin-Consensus-Rust/tree/dev:
+#            - dev@33903719f949d96f81d4dda9dd5269ced6868b64
 #        Creditcoin-Gateway:
-#            - dev@e354f2e2a837f7408f5bba21f9a4fa015120b694
+#            - dev@e354f2e2a837f7408f5bba21f9a4fa015120b694, using ccplugin v1.1.2
 
 version: "3.7"
 
@@ -61,7 +53,7 @@ services:
             max-size: "10m"
 
   validator:
-    image: gluwa/creditcoin-validator-priv:testing-2.0-41
+    image: gluwa/creditcoin-validator-priv:testing-1.8-01
     container_name: sawtooth-validator-testnet
     volumes:
       - type: volume
@@ -106,7 +98,7 @@ services:
             max-size: "100m"
 
   rest-api:
-    image: gluwa/sawtooth-rest-api-priv:testing-2.0-41
+    image: gluwa/sawtooth-rest-api-priv:testing-1.8-01
     container_name: sawtooth-rest-api-testnet
     ports:
       - 8008:8008
@@ -124,7 +116,7 @@ services:
             max-size: "10m"
 
   processor:
-    image: gluwa/creditcoin-processor-priv:testing-2.0-41
+    image: gluwa/creditcoin-processor-priv:testing-1.8-01
     container_name: creditcoin-processor-testnet
     depends_on:
       - validator
@@ -138,14 +130,14 @@ services:
             max-size: "10m"
 
   consensus:
-    image: gluwa/creditcoin-consensus-priv:testing-2.0-41
+    image: gluwa/creditcoin-consensus-priv:testing-1.8-01
     container_name: consensus
     depends_on:
       - validator
     entrypoint: ccconsensus -E tcp://validator:5050 -vvv
 
   gateway:
-    image: gluwa/creditcoin-gateway-priv:testing-2.0-29
+    image: gluwa/creditcoin-gateway-priv:testing-1.8-01
     container_name: creditcoin-gateway-testnet
     expose:
       - 55555
@@ -154,7 +146,7 @@ services:
     secrets:
      - source: gateway_config
        target: /home/Creditcoin/Gateway/appsettings.json
-    entrypoint: ./ccgateway
+    entrypoint: ./ccgateway -v
     stop_signal: SIGKILL
     logging:
         driver: "json-file"
